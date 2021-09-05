@@ -9,6 +9,7 @@
 
 <script>
 import FirebaseSingleton from '../firebase.js'
+import { collection, getDocs } from 'firebase/firestore'
 
 export default {
   data: () => ({
@@ -17,9 +18,8 @@ export default {
   async mounted () {
     await FirebaseSingleton.initialize()
     const firestore = await FirebaseSingleton.getFirestore()
-    console.log(firestore)
-    const querySnapshot = await firestore.collection("users").get()
-    this.docs = querySnapshot.docs;
+    const querySnapshot = await getDocs(collection(firestore, 'users'))
+    this.docs = querySnapshot.docs
   },
 }
 </script>

@@ -1,4 +1,4 @@
-import Firebase from "firebase/app"
+import { initializeApp } from 'firebase/app'
 let
   resolve,
   firebaseInstance,
@@ -19,7 +19,7 @@ export async function initialize () {
   if (import.meta.env.SSR) return undefined
   if (firebaseInstance) return firebaseInstance
 
-  firebaseInstance = Firebase.initializeApp(firebaseConfig)
+  firebaseInstance = initializeApp(firebaseConfig)
   resolve(firebaseInstance)
   return firebaseInstance
 }
@@ -33,9 +33,9 @@ export async function getInstance () {
 export async function getFirestore () {
   if (firestoreInstance) return firestoreInstance
 
-  await import('firebase/firestore')
-  const firebase = await getInstance()
-  firestoreInstance = firebase.firestore()
+  const { getFirestore } = import('firebase/firestore')
+  await getInstance()
+  firestoreInstance = getFirestore()
   return firestoreInstance
 }
 
@@ -43,5 +43,4 @@ export default {
   initialize,
   getInstance,
   getFirestore,
-  Firebase,
 }
