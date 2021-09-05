@@ -1,8 +1,7 @@
 ---
 import { app, db } from '../firebase.js'
-import { collection, getDocs } from "firebase/firestore";
 
-const querySnapshot = await getDocs(collection(db, "astro"));
+const querySnapshot = await db.collection("users").get();
 console.log(querySnapshot.docs);
 ---
 <section>

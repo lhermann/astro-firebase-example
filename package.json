@@ -12,6 +12,6 @@
     "astro": "^0.20.4"
   },
   "dependencies": {
-    "firebase": "^9.0.1"
+    "firebase": "^8.10.0"
   }
 }
